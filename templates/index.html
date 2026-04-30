@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Accueil</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+
+<body id="body">
+
+<button onclick="toggleMode()">🌙 / ☀️</button>
+
+<h1>Application d’analyse de données</h1>
+
+<p>
+Cette application permet de collecter et analyser les performances des étudiants.
+Vous pouvez entrer les données et visualiser les résultats sous forme de graphiques.
+</p>
+
+<a href="/charts"><button>Voir les graphiques</button></a>
+
+<h2>Ajouter des données</h2>
+
+<form method="POST">
+  <input type="text" name="name" placeholder="Nom" required>
+  <input type="number" name="study" placeholder="Heures d'étude" required>
+  <input type="number" name="score" placeholder="Note" required>
+
+  <button type="submit">Enregistrer</button>
+</form>
+
+<h2>Données collectées</h2>
+
+<table>
+<tr>
+  <th>Nom</th>
+  <th>Heures</th>
+  <th>Note</th>
+</tr>
+
+{% for d in data %}
+<tr>
+  <td>{{ d.name }}</td>
+  <td>{{ d.study }}</td>
+  <td>{{ d.score }}</td>
+</tr>
+{% endfor %}
+
+</table>
+
+<script src="{{ url_for('static', filename='js/theme.js') }}"></script>
+
+</body>
+</html>

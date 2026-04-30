@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Graphiques</title>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+
+<body id="body">
+
+<button onclick="toggleMode()">🌙 / ☀️</button>
+
+<h1>Graphiques</h1>
+
+<a href="/"><button>Retour</button></a>
+
+<canvas id="chart"></canvas>
+
+<script>
+let data = {{ data | tojson }};
+
+let labels = data.map(d => d.name);
+let scores = data.map(d => d.score);
+
+new Chart(document.getElementById("chart"), {
+  type: "bar",
+  data: {
+    labels: labels,
+    datasets: [{
+      label: "Notes",
+      data: scores
+    }]
+  }
+});
+</script>
+
+<script src="{{ url_for('static', filename='js/theme.js') }}"></script>
+
+</body>
+</html>
